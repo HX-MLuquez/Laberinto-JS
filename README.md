@@ -13,8 +13,22 @@ Sin embargo, aquí está el truco: el laberinto está diseñado de tal manera qu
 Ejemplo:
 
 javascript
-Copy code
-const laberintoInfinito = [1, 1, 1, 1, 1, 1, 1, 1];
-const resultado = resolverLaberintoInfinito(laberintoInfinito, 0);
-console.log(resultado); // Debe imprimir "No se puede resolver el laberinto."
-Nota: Este ejercicio tiene la intención de desafiar a los estudiantes a comprender y reconocer cuando una función recursiva debe terminar sin llegar a una solución. Puede ser útil para explorar conceptos de recursión y cómo manejar casos en los que no hay una solución real.
+```js
+//* Lab simple
+const initLabA = { x: 0, y: 0 };
+const finishLabA = { x: 3, y: 0 };
+
+export const labA = {
+  0: [73, [], "", []],
+  1: ["", [], [], []],
+  2: [[], [], "", []],
+  3: [{}, "", "", ""],
+};
+
+export const labWayA = {
+  0: [73, [], "", ""],
+  1: ["", [], "", ""],
+  2: [[], [], "", ""],
+  3: [{}, "", "", ""],
+};
+```
