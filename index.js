@@ -7,6 +7,9 @@
 //!  <script type="module" <--
 import { labA, labB, labWayZ, labWayZZ, labWayZZLarge } from "./modelos.js"; //! .js
 
+const sonidoPasos = new Audio("./sounds/pasos.mp3");
+const sonidoLlegada = new Audio("./sounds/llegada.mp3");
+
 var fechaInicial;
 var modeloLab;
 
@@ -88,20 +91,22 @@ function moveHuman(event) {
         const diferenciaEnMilisegundos = fechaActual - fechaInicial;
         const segTranscurridos = diferenciaEnMilisegundos / 1000;
         console.log("--> ", segTranscurridos);
-        if (segTranscurridos >= 10) {
+        if (segTranscurridos >= 20) {
           alert("Ha pasado tu tiempo, lo siento");
           puntoHuman = inicio;
           armarLaberinto();
           return;
         }
         if (newPosition.className === "camino") {
+          sonidoPasos.play();
           newPosition.className = "humano";
           puntoHuman.x = newPosX;
           puntoHuman.y = newPosY;
         } else if (newPosition.className === "llegada") {
-          alert("¡Lo has logrado!");
+          sonidoLlegada.play();
           puntoHuman = inicio;
           armarLaberinto();
+          alert("¡Lo has logrado!");
         } else if (newPosition.className === "pared") {
           currentPosition.className = "humano";
         }

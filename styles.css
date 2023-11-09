@@ -20,23 +20,23 @@ body {
 }
 .pared {
   background-color: brown;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height:30px;
 }
 .camino {
   background-color: white;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
 }
 .humano {
   background-color: yellow;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
 }
 .llegada {
   background-color: green;
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
 }
 /* Estilo base del botón */
 .mi-boton {
