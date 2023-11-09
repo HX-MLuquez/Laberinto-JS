@@ -5,16 +5,18 @@
 //   3: [{}, "", "", ""],
 // };
 //!  <script type="module" <--
-import { labA, labB, labWayZ } from "./modelos.js"; //! .js
+import { labA, labB, labWayZ, labWayZZ, labWayZZLarge } from "./modelos.js"; //! .js
 
-const listLab = [labA, labB, labWayZ];
+var fechaInicial;
+var modeloLab;
+
+const listLab = [labA, labB, labWayZ, labWayZZ, labWayZZLarge];
+
 function obtenerModeloLab() {
-  const indiceAleatorio = Math.floor(Math.random() * listLab.length); 
-  const modeloLab = listLab[indiceAleatorio]; 
+  const indiceAleatorio = Math.floor(Math.random() * listLab.length);
+  const modeloLab = listLab[indiceAleatorio];
   return modeloLab;
 }
-
-var modeloLab 
 
 const inicio = { x: 0, y: 0 };
 var puntoHuman = { ...inicio };
@@ -25,9 +27,10 @@ var crear_laberinto = document.getElementById("crear_laberinto");
 
 function armarLaberinto() {
   terreno.innerHTML = "";
+  fechaInicial = new Date();
   // console.log("laberinto en construcción");
-  modeloLab = obtenerModeloLab()
-  puntoHuman = { ...inicio }
+  modeloLab = obtenerModeloLab();
+  puntoHuman = { ...inicio };
   for (const key in modeloLab) {
     let divFile = document.createElement("div");
     divFile.className = "fila";
@@ -39,9 +42,6 @@ function armarLaberinto() {
     });
     terreno.appendChild(divFile);
   }
-  setTimeout(() => {
-    alert("tu tiempo se ha terminado")
-  }, 5000);
 }
 
 function setElementClass(element, elementType) {
@@ -80,20 +80,34 @@ function moveHuman(event) {
         newPosY++;
         break;
     }
-
-    const newPosition = document.getElementById(`${newPosX}.${newPosY}`);
-    if (newPosition) {
-      if (newPosition.className === "camino") {
-        newPosition.className = "humano";
-        puntoHuman.x = newPosX;
-        puntoHuman.y = newPosY;
-      } else if (newPosition.className === "llegada") {
-        alert("¡Lo has logrado!");
-        puntoHuman = inicio;
-        armarLaberinto();
-      } else if (newPosition.className === "pared") {
-        currentPosition.className = "humano";
+    
+    if (modeloLab[newPosX] && modeloLab[newPosX][newPosY] !== undefined) {
+      const newPosition = document.getElementById(`${newPosX}.${newPosY}`);
+      if (newPosition) {
+        let fechaActual = new Date();
+        const diferenciaEnMilisegundos = fechaActual - fechaInicial;
+        const segTranscurridos = diferenciaEnMilisegundos / 1000;
+        console.log("--> ", segTranscurridos);
+        if (segTranscurridos >= 10) {
+          alert("Ha pasado tu tiempo, lo siento");
+          puntoHuman = inicio;
+          armarLaberinto();
+          return;
+        }
+        if (newPosition.className === "camino") {
+          newPosition.className = "humano";
+          puntoHuman.x = newPosX;
+          puntoHuman.y = newPosY;
+        } else if (newPosition.className === "llegada") {
+          alert("¡Lo has logrado!");
+          puntoHuman = inicio;
+          armarLaberinto();
+        } else if (newPosition.className === "pared") {
+          currentPosition.className = "humano";
+        }
       }
+    } else{
+      currentPosition.className = "humano";
     }
   }
 }
