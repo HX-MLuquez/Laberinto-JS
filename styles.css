@@ -21,7 +21,7 @@ body {
 .pared {
   background-color: brown;
   width: 30px;
-  height:30px;
+  height: 30px;
 }
 .camino {
   background-color: white;
@@ -64,4 +64,27 @@ body {
   color: white; /* Cambia esto al color de texto que desees */
   text-align: center;
   padding: 10px;
+}
+
+#contadorA {
+  font-size: 2em;
+  position: fixed;
+  color: #fff;
+  background-color: #2524245a;
+  padding: 8px;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 12px;
+}
+#contadorB {
+  font-size: 2em;
+  color: #fff;
+  background-color: #2524245a;
+  padding: 8px;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 12px;
+}
+#title{
+  display: flex;
 }

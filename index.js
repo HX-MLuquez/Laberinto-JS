@@ -5,15 +5,34 @@
 //   3: [{}, "", "", ""],
 // };
 //!  <script type="module" <--
-import { labA, labB, labWayZ, labWayZZ, labWayZZLarge, labWayYYLarge, labWayZZZLarge } from "./modelos.js"; //! .js
+import {
+  labA,
+  labB,
+  labWayZ,
+  labWayZZ,
+  labWayZZLarge,
+  labWayYYLarge,
+  labWayZZZLarge,
+} from "./modelos.js"; //! .js
 
 const sonidoPasos = new Audio("./sounds/pasos.mp3");
 const sonidoLlegada = new Audio("./sounds/llegada.mp3");
+var time = 20;
+var contador = time; // Establecer el tiempo inicial en segundos
+var reloj;
 
 var fechaInicial;
 var modeloLab;
 
-const listLab = [labA, labB, labWayZ, labWayZZ, labWayZZLarge, labWayYYLarge, labWayZZZLarge];
+const listLab = [
+  labA,
+  labB,
+  labWayZ,
+  labWayZZ,
+  labWayZZLarge,
+  labWayYYLarge,
+  labWayZZZLarge,
+];
 
 function obtenerModeloLab() {
   const indiceAleatorio = Math.floor(Math.random() * listLab.length);
@@ -83,7 +102,7 @@ function moveHuman(event) {
         newPosY++;
         break;
     }
-    
+
     if (modeloLab[newPosX] && modeloLab[newPosX][newPosY] !== undefined) {
       const newPosition = document.getElementById(`${newPosX}.${newPosY}`);
       if (newPosition) {
@@ -91,10 +110,13 @@ function moveHuman(event) {
         const diferenciaEnMilisegundos = fechaActual - fechaInicial;
         const segTranscurridos = diferenciaEnMilisegundos / 1000;
         console.log("--> ", segTranscurridos);
-        if (segTranscurridos >= 20) {
+        if (segTranscurridos >= time) {
           alert("Ha pasado tu tiempo, lo siento");
+          contador = time;
+          clearInterval(reloj);
           puntoHuman = inicio;
           armarLaberinto();
+          iniciarReloj();
           return;
         }
         if (newPosition.className === "camino") {
@@ -106,16 +128,45 @@ function moveHuman(event) {
           sonidoLlegada.play();
           puntoHuman = inicio;
           armarLaberinto();
+          clearInterval(reloj);
           alert("¡Lo has logrado!");
+          iniciarReloj();
         } else if (newPosition.className === "pared") {
           currentPosition.className = "humano";
         }
       }
-    } else{
+    } else {
       currentPosition.className = "humano";
     }
   }
 }
 
-crear_laberinto.addEventListener("click", armarLaberinto);
+// crear_laberinto.addEventListener("click", armarLaberinto);
 document.addEventListener("keydown", moveHuman);
+
+var contadorElemento = document.getElementById("contadorA");
+var contadorElementoB = document.getElementById("contadorB");
+
+function actualizarContador() {
+  contadorElemento.textContent = contador;
+  contadorElementoB.textContent = contador;
+  if (contador === 0) {
+    clearInterval(reloj); // Detener el reloj cuando el contador llega a cero
+    alert("Tiempo agotado. Inténtalo de nuevo.");
+    puntoHuman = inicio;
+    armarLaberinto();
+  } else {
+    contador--;
+  }
+}
+
+function iniciarReloj() {
+  clearInterval(reloj); // Limpiar el intervalo anterior
+  contador = time; // Restablecer el contador a x segundos
+  reloj = setInterval(actualizarContador, 1000); // Establecer un nuevo intervalo
+}
+
+crear_laberinto.addEventListener("click", function () {
+  armarLaberinto();
+  iniciarReloj(); // Iniciar el reloj al armar el laberinto
+});
