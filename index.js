@@ -5,7 +5,7 @@
 //   3: [{}, "", "", ""],
 // };
 //!  <script type="module" <--
-import { labA, labB, labWayZ, labWayZZ, labWayZZLarge } from "./modelos.js"; //! .js
+import { labA, labB, labWayZ, labWayZZ, labWayZZLarge, labWayYYLarge, labWayZZZLarge } from "./modelos.js"; //! .js
 
 const sonidoPasos = new Audio("./sounds/pasos.mp3");
 const sonidoLlegada = new Audio("./sounds/llegada.mp3");
@@ -13,7 +13,7 @@ const sonidoLlegada = new Audio("./sounds/llegada.mp3");
 var fechaInicial;
 var modeloLab;
 
-const listLab = [labA, labB, labWayZ, labWayZZ, labWayZZLarge];
+const listLab = [labA, labB, labWayZ, labWayZZ, labWayZZLarge, labWayYYLarge, labWayZZZLarge];
 
 function obtenerModeloLab() {
   const indiceAleatorio = Math.floor(Math.random() * listLab.length);
