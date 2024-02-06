@@ -1,0 +1,90 @@
+body {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: normal;
+  align-items: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+#terreno {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  padding: 8px;
+  background-color: #333;
+}
+.fila {
+  display: flex;
+}
+.pared {
+  background-color: brown;
+  width: 30px;
+  height: 30px;
+}
+.camino {
+  background-color: white;
+  width: 30px;
+  height: 30px;
+}
+.humano {
+  background-color: yellow;
+  width: 30px;
+  height: 30px;
+}
+.llegada {
+  background-color: green;
+  width: 30px;
+  height: 30px;
+}
+/* Estilo base del botón */
+.mi-boton {
+  background-color: #4caf50; /* Color de fondo */
+  color: white; /* Color de texto */
+  padding: 10px 20px; /* Relleno (padding) */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Borde redondeado */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+  transition: background-color 0.3s, color 0.3s; /* Transición de color al pasar el mouse */
+}
+
+/* Estilo al pasar el mouse por encima del botón */
+.mi-boton:hover {
+  background-color: #45a049; /* Cambia el color de fondo al pasar el mouse */
+  color: white; /* Cambia el color del texto al pasar el mouse */
+  margin: 5px; /* Añade un margen alrededor del botón al pasar el mouse */
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Agrega una sombra al pasar el mouse */
+}
+#footer {
+  /* position: fixed; */
+  bottom: 0;
+  width: 100%;
+  background-color: #333; /* Cambia esto al color de fondo que desees */
+  color: white; /* Cambia esto al color de texto que desees */
+  text-align: center;
+  padding: 10px;
+}
+
+#contadorA {
+  font-size: 2em;
+  position: fixed;
+  color: #fff;
+  background-color: #2524245a;
+  padding: 8px;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 12px;
+}
+#contadorB {
+  font-size: 2em;
+  color: #fff;
+  background-color: #2524245a;
+  padding: 8px;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 12px;
+}
+#title{
+  display: flex;
+}
