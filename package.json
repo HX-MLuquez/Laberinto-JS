@@ -1,0 +1,13 @@
+{
+  "name": "laberinto-infinito",
+  "version": "1.0.0",
+  "description": "Consigna del Ejercicio: \"El Laberinto Infinito\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "start chrome http://127.0.0.1:5501/LABERINTO%20INFINITO/index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
