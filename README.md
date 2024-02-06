@@ -1,5 +1,7 @@
 # LABERINTO INFINITO
 
+## Para iniciar en entorno local:
+
 Son una serie de Laberintos que puedes iniciar a recorrer con el comando:
 ```bash
 npm start
