@@ -1,8 +1,12 @@
 // const labA = {
-//   0: [73, [], "", []],
-//   1: ["", [], [], []],
-//   2: [[], [], "", []],
-//   3: [{}, "", "", ""],
+//   title: "Laberinto sin fauno",
+//   level: "Easy",
+//   body: {
+//     0: [73, [], "", []],
+//     1: ["", [], [], []],
+//     2: [[], [], "", []],
+//     3: [{}, "", "", ""],
+//   },
 // };
 //!  <script type="module" <--
 import {
@@ -13,7 +17,11 @@ import {
   labWayZZLarge,
   labWayYYLarge,
   labWayZZZLarge,
+  MIKE,
+  MIKE_FACE
 } from "./modelos.js"; //! .js
+
+var titleh= document.getElementById("titleh")
 
 const sonidoPasos = new Audio("./sounds/pasos.mp3");
 const sonidoLlegada = new Audio("./sounds/llegada.mp3");
@@ -32,12 +40,17 @@ const listLab = [
   labWayZZLarge,
   labWayYYLarge,
   labWayZZZLarge,
+  MIKE,
+  MIKE_FACE
 ];
 
 function obtenerModeloLab() {
+  titleh.innerHTML= "LABERINTO: "
   const indiceAleatorio = Math.floor(Math.random() * listLab.length);
   const modeloLab = listLab[indiceAleatorio];
-  return modeloLab;
+  
+  titleh.innerHTML = titleh.innerHTML + modeloLab.title
+  return modeloLab.lab;
 }
 
 const inicio = { x: 0, y: 0 };
