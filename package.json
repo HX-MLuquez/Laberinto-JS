@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "start": "start chrome http://127.0.0.1:5501/LABERINTO%20INFINITO/index.html"
+    "start": "start chrome http://127.0.0.1:5501/index.html"
   },
   "keywords": [],
   "author": "",
