@@ -18,7 +18,8 @@ import {
   labWayYYLarge,
   labWayZZZLarge,
   MIKE,
-  MIKE_FACE
+  MIKE_FACE,
+  large
 } from "./modelos.js"; //! .js
 
 var titleh= document.getElementById("titleh")
@@ -41,7 +42,8 @@ const listLab = [
   labWayYYLarge,
   labWayZZZLarge,
   MIKE,
-  MIKE_FACE
+  MIKE_FACE,
+  large
 ];
 
 function obtenerModeloLab() {
