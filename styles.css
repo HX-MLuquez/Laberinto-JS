@@ -62,9 +62,9 @@ body {
   margin: 0 auto; /* Centra horizontalmente los elementos hijos */
   max-width: 99%; /* O cualquier ancho máximo que desees */
 }
-#list{
+#list {
   display: flex;
-  align-items: center
+  align-items: center;
 }
 
 /* Filas del laberinto */
@@ -119,7 +119,7 @@ body {
     text-align: center;
   }
 
-  #contadorA{
+  #contadorA {
     font-size: 1.5em;
   }
 
@@ -134,3 +134,44 @@ body {
 }
 
 /* NavBar */
+
+/* Cursor para movimiento */
+
+#cursor-controller {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;
+}
+
+.horizontal-arrows {
+  display: flex;
+  gap: 20px;
+}
+
+.arrow {
+  background-color: #6a0dad35;
+  color: white;
+  font-size: 24px;
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.arrow:active {
+  background-color: #4b0082; /* Cambia el color al presionar */
+}
+
+/* Cursor para movimiento para versión responsive */
+
+@media (min-width: 768px) {
+  #cursor-controller {
+    display: none; /* Oculta el controlador en pantallas grandes */
+  }
+}

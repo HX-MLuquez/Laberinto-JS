@@ -19,10 +19,10 @@ import {
   labWayZZZLarge,
   MIKE,
   MIKE_FACE,
-  large
+  large,
 } from "./modelos.js"; //! .js
 
-var titleh= document.getElementById("titleh")
+var titleh = document.getElementById("titleh");
 
 const sonidoPasos = new Audio("./sounds/pasos.mp3");
 const sonidoLlegada = new Audio("./sounds/llegada.mp3");
@@ -43,15 +43,15 @@ const listLab = [
   labWayZZZLarge,
   MIKE,
   MIKE_FACE,
-  large
+  large,
 ];
 
 function obtenerModeloLab() {
-  titleh.innerHTML= "MAZE: "
+  titleh.innerHTML = "MAZE: ";
   const indiceAleatorio = Math.floor(Math.random() * listLab.length);
   const modeloLab = listLab[indiceAleatorio];
-  
-  titleh.innerHTML = titleh.innerHTML + modeloLab.title
+
+  titleh.innerHTML = titleh.innerHTML + modeloLab.title;
   return modeloLab.lab;
 }
 
@@ -183,3 +183,45 @@ crear_laberinto.addEventListener("click", function () {
   armarLaberinto();
   iniciarReloj(); // Iniciar el reloj al armar el laberinto
 });
+
+//* Cursor para movimiento para versión responsive - funciones
+function handleDirection(direction) {
+  console.log("-->", direction);
+  const event = { key: direction };
+  moveHuman(event); // Llama a la función que mueve al personaje
+}
+
+//* Agregar eventos de clic para cada botón de dirección
+
+// Mejorar la experiencia táctil
+// Experiencia de movimiento más fluida, escuchar el evento touchstart en lugar de click,
+// para que el personaje se mueva tan pronto como el usuario toque el botón.
+/*
+document
+  .getElementById("up")
+  .addEventListener("touchstart", () => handleDirection("ArrowUp"));
+document
+  .getElementById("down")
+  .addEventListener("touchstart", () => handleDirection("ArrowDown"));
+document
+  .getElementById("left")
+  .addEventListener("touchstart", () => handleDirection("ArrowLeft"));
+document
+  .getElementById("right")
+  .addEventListener("touchstart", () => handleDirection("ArrowRight"));
+*/
+
+
+document
+  .getElementById("up")
+  .addEventListener("click", () => handleDirection("ArrowUp"));
+document
+  .getElementById("down")
+  .addEventListener("click", () => handleDirection("ArrowDown"));
+document
+  .getElementById("left")
+  .addEventListener("click", () => handleDirection("ArrowLeft"));
+document
+  .getElementById("right")
+  .addEventListener("click", () => handleDirection("ArrowRight"));
+
