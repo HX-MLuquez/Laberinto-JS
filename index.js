@@ -1,14 +1,3 @@
-// const labA = {
-//   title: "Laberinto sin fauno",
-//   level: "Easy",
-//   body: {
-//     0: [73, [], "", []],
-//     1: ["", [], [], []],
-//     2: [[], [], "", []],
-//     3: [{}, "", "", ""],
-//   },
-// };
-//!  <script type="module" <--
 import {
   labA,
   labB,
@@ -20,42 +9,60 @@ import {
   MIKE,
   MIKE_FACE,
   large,
-} from "./modelos.js"; //! .js
+  PACMANsolution,
+} from "./modelos.js"; 
 
 var titleh = document.getElementById("titleh");
 
 const sonidoPasos = new Audio("./sounds/pasos.mp3");
 const sonidoLlegada = new Audio("./sounds/llegada.mp3");
-var time = 20;
+var time = 60;
+
 var contador = time; // Establecer el tiempo inicial en segundos
 var reloj;
 
 var fechaInicial;
 var modeloLab;
+var title = "Laberinto sin fauno";
 
 const listLab = [
   labA,
   labB,
+  PACMANsolution,
   labWayZ,
+  PACMANsolution,
   labWayZZ,
+  PACMANsolution,
   labWayZZLarge,
+  PACMANsolution,
   labWayYYLarge,
   labWayZZZLarge,
+  PACMANsolution,
   MIKE,
   MIKE_FACE,
   large,
 ];
 
+var inicio = { x: 23, y: 10 };
+
 function obtenerModeloLab() {
   titleh.innerHTML = "MAZE: ";
   const indiceAleatorio = Math.floor(Math.random() * listLab.length);
-  const modeloLab = listLab[indiceAleatorio];
-
+  modeloLab = listLab[indiceAleatorio];
   titleh.innerHTML = titleh.innerHTML + modeloLab.title;
+  if (modeloLab.title === "PACMAN") {
+    inicio = { x: 23, y: 14 };
+  } else {
+    inicio = { x: 0, y: 0 };
+  }
+  title = modeloLab.title;
   return modeloLab.lab;
 }
 
-const inicio = { x: 0, y: 0 };
+// de 14[0] salta a 14[26]   y de  14[27] salta a 14[1]
+
+// var inicio = { x: 23, y: 14 };
+
 var puntoHuman = { ...inicio };
 const llegada = { x: 8, y: 2 };
 
@@ -93,7 +100,8 @@ function setElementClass(element, elementType) {
   }
 }
 
-function moveHuman(event) {
+function moveHuman(event, title) {
+  // console.log("moveHuman", title);
   const currentPosition = document.getElementById(
     `${puntoHuman.x}.${puntoHuman.y}`
   );
@@ -117,14 +125,30 @@ function moveHuman(event) {
         newPosY++;
         break;
     }
+    // console.log(">>>title>>>>>", title);
+    // console.log(">>>>>>>>", puntoHuman.x);
+    if (title === "PACMAN" && puntoHuman.x === 14) {
+      if (newPosY === 0) {
+        newPosY = 26; // Si sale por la izquierda (14[0]), lo mandamos a (14[26])
+      } else if (newPosY === 27) {
+        newPosY = 1; // Si sale por la derecha (14[27]), lo mandamos a (14[1])
+      }
+    }
 
-    if (modeloLab[newPosX] && modeloLab[newPosX][newPosY] !== undefined) {
+    // if (modeloLab[newPosX] && modeloLab[newPosX][newPosY] !== undefined) {
+      if (
+        modeloLab.hasOwnProperty(newPosX) &&
+        Array.isArray(modeloLab[newPosX]) &&
+        newPosY >= 0 &&
+        newPosY < modeloLab[newPosX].length
+      ) {
+      
       const newPosition = document.getElementById(`${newPosX}.${newPosY}`);
       if (newPosition) {
         let fechaActual = new Date();
         const diferenciaEnMilisegundos = fechaActual - fechaInicial;
         const segTranscurridos = diferenciaEnMilisegundos / 1000;
-        console.log("--> ", segTranscurridos);
+        // console.log("--> ", segTranscurridos);
         if (segTranscurridos >= time) {
           alert("Ha pasado tu tiempo, lo siento");
           contador = time;
@@ -157,7 +181,9 @@ function moveHuman(event) {
 }
 
 // crear_laberinto.addEventListener("click", armarLaberinto);
-document.addEventListener("keydown", moveHuman);
+document.addEventListener("keydown", (event) =>
+  moveHuman(event, title)
+);
 
 var contadorElemento = document.getElementById("contadorA");
 
@@ -186,7 +212,7 @@ crear_laberinto.addEventListener("click", function () {
 
 //* Cursor para movimiento para versión responsive - funciones
 function handleDirection(direction) {
-  console.log("-->", direction);
+  // console.log("-->", direction);
   const event = { key: direction };
   moveHuman(event); // Llama a la función que mueve al personaje
 }
@@ -211,7 +237,6 @@ document
   .addEventListener("touchstart", () => handleDirection("ArrowRight"));
 */
 
-
 document
   .getElementById("up")
   .addEventListener("click", () => handleDirection("ArrowUp"));
@@ -224,4 +249,3 @@ document
 document
   .getElementById("right")
   .addEventListener("click", () => handleDirection("ArrowRight"));
-
